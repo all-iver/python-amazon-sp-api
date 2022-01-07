@@ -10,7 +10,7 @@ class Inventories(Client):
     """
 
     @sp_endpoint('/fba/inventory/v1/summaries')
-    def get_inventory_summary_marketplace(self, **kwargs) -> ApiResponse:
+    def get_inventory_summary_marketplace(self, **kwargs):
         """
         get_inventory_summary_marketplace(self, **kwargs) -> GetInventorySummariesResponse
 

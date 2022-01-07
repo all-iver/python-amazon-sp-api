@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class VendorDirectFulfillmentInventory(Client):
 
 
     @sp_endpoint('/vendor/directFulfillment/inventory/v1/warehouses/{}/items', method='POST')
-    def submit_inventory_update(self, warehouseId, **kwargs) -> ApiResponse:
+    def submit_inventory_update(self, warehouseId, **kwargs):
         """
-        submit_inventory_update(self, warehouseId, **kwargs) -> ApiResponse
+        submit_inventory_update(self, warehouseId, **kwargs)
 
         Submits inventory updates for the specified warehouse for either a partial or full feed of inventory items.
 

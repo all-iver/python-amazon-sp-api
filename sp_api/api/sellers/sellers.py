@@ -5,5 +5,5 @@ from sp_api.base import Client, Marketplaces, ApiResponse
 class Sellers(Client):
 
     @sp_endpoint('/sellers/v1/marketplaceParticipations')
-    def get_marketplace_participation(self, **kwargs) -> ApiResponse:
+    def get_marketplace_participation(self, **kwargs):
         return self._request(kwargs.pop('path'))

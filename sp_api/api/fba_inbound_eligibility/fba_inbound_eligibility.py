@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class FbaInboundEligibility(Client):
 
 
     @sp_endpoint('/fba/inbound/v1/eligibility/itemPreview', method='GET')
-    def get_item_eligibility_preview(self, **kwargs) -> ApiResponse:
+    def get_item_eligibility_preview(self, **kwargs):
         """
-        get_item_eligibility_preview(self, **kwargs) -> ApiResponse
+        get_item_eligibility_preview(self, **kwargs)
 
         This operation gets an eligibility preview for an item that you specify. You can specify the type of eligibility preview that you want (INBOUND or COMMINGLING). For INBOUND previews, you can specify the marketplace in which you want to determine the item's eligibility.
 

@@ -1,6 +1,5 @@
-import urllib.parse
 import zlib
-from collections import abc
+import six.moves.collections_abc as abc
 from datetime import datetime
 
 import requests
@@ -17,9 +16,9 @@ class Reports(Client):
     """
 
     @sp_endpoint('/reports/2021-06-30/reports', method='GET')
-    def get_reports(self, **kwargs) -> ApiResponse:
+    def get_reports(self, **kwargs):
         """
-        get_reports(self, **kwargs) -> ApiResponse
+        get_reports(self, **kwargs)
 
         Returns report details for the reports that match the filters that you specify.
 
@@ -69,9 +68,9 @@ class Reports(Client):
         return self._request(kwargs.pop('path'), params=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/reports', method='POST')
-    def create_report(self, **kwargs) -> ApiResponse:
+    def create_report(self, **kwargs):
         """
-        create_report(self, **kwargs) -> ApiResponse
+        create_report(self, **kwargs)
 
         See report types at
         :link: https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md
@@ -108,9 +107,9 @@ class Reports(Client):
         return self._request(kwargs.pop('path'), data=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/reports/{}', method='DELETE')
-    def cancel_report(self, reportId, **kwargs) -> ApiResponse:
+    def cancel_report(self, reportId, **kwargs):
         """
-        cancel_report(self, reportId, **kwargs) -> ApiResponse
+        cancel_report(self, reportId, **kwargs)
 
         Cancels the report that you specify. Only reports with processingStatus=IN_QUEUE can be cancelled. Cancelled reports are returned in subsequent calls to the getReport and getReports operations.
 
@@ -134,7 +133,7 @@ class Reports(Client):
         return self._request(fill_query_params(kwargs.pop('path'), reportId), data=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/reports/{}', method='GET')
-    def get_report(self, reportId, **kwargs) -> ApiResponse:
+    def get_report(self, reportId, **kwargs):
         """
         get_report(self, report_id, **kwargs)
         Returns report details (including the reportDocumentId, if available) for the report that you specify.
@@ -166,7 +165,7 @@ class Reports(Client):
         return self._request(fill_query_params(kwargs.pop('path'), reportId), params=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/schedules', method='GET')
-    def get_report_schedules(self, **kwargs) -> ApiResponse:
+    def get_report_schedules(self, **kwargs):
         """
         Returns report schedule details that match the filters that you specify.
 
@@ -192,9 +191,9 @@ class Reports(Client):
         return self._request(kwargs.pop('path'), params=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/schedules', method='POST')
-    def create_report_schedule(self, **kwargs) -> ApiResponse:
+    def create_report_schedule(self, **kwargs):
         """
-        create_report_schedule(self, **kwargs) -> ApiResponse
+        create_report_schedule(self, **kwargs)
 
         Creates a report schedule. If a report schedule with the same report type and marketplace IDs already exists, it will be cancelled and replaced with this one.
 
@@ -228,9 +227,9 @@ class Reports(Client):
         return self._request(kwargs.pop('path'), data=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/schedules/{}', method='DELETE')
-    def cancel_report_schedule(self, reportScheduleId, **kwargs) -> ApiResponse:
+    def cancel_report_schedule(self, reportScheduleId, **kwargs):
         """
-        cancel_report_schedule(self, reportScheduleId, **kwargs) -> ApiResponse
+        cancel_report_schedule(self, reportScheduleId, **kwargs)
 
         Cancels the report schedule that you specify.
 
@@ -258,9 +257,9 @@ class Reports(Client):
         """
         return self._request(fill_query_params(kwargs.pop('path'), reportScheduleId), data=kwargs)
 
-    def delete_report_schedule(self, reportScheduleId, **kwargs) -> ApiResponse:
+    def delete_report_schedule(self, reportScheduleId, **kwargs):
         """
-        cancel_report_schedule(self, reportScheduleId, **kwargs) -> ApiResponse
+        cancel_report_schedule(self, reportScheduleId, **kwargs)
 
         Cancels the report schedule that you specify.
 
@@ -289,9 +288,9 @@ class Reports(Client):
         return self.cancel_report_schedule(reportScheduleId)
 
     @sp_endpoint('/reports/2021-06-30/schedules/{}', method='GET')
-    def get_report_schedule(self, reportScheduleId, **kwargs) -> ApiResponse:
+    def get_report_schedule(self, reportScheduleId, **kwargs):
         """
-        get_report_schedule(self, reportScheduleId, **kwargs) -> ApiResponse
+        get_report_schedule(self, reportScheduleId, **kwargs)
 
         Returns report schedule details for the report schedule that you specify.
 
@@ -320,10 +319,10 @@ class Reports(Client):
         return self._request(fill_query_params(kwargs.pop('path'), reportScheduleId), params=kwargs)
 
     @sp_endpoint('/reports/2021-06-30/documents/{}', method='GET')
-    def get_report_document(self, reportDocumentId, download: bool = False, file=None,
-                            character_code: str = 'iso-8859-1', **kwargs) -> ApiResponse:
+    def get_report_document(self, reportDocumentId, download=False, file=None,
+                            character_code='iso-8859-1', **kwargs):
         """
-        get_report_document(self, document_id, decrypt: bool = False, file=None, character_code: str = 'iso-8859-1', ** kwargs) -> ApiResponse
+        get_report_document(self, document_id, decrypt: bool = False, file=None, character_code: str = 'iso-8859-1', ** kwargs)
         Returns the information required for retrieving a report document's contents. This includes a presigned URL for the report document as well as the information required to decrypt the document's contents.
 
         If decrypt = True the report will automatically be loaded and decrypted/unpacked

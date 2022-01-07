@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class VendorDirectFulfillmentPayments(Client):
 
 
     @sp_endpoint('/vendor/directFulfillment/payments/v1/invoices', method='POST')
-    def submit_invoice(self, **kwargs) -> ApiResponse:
+    def submit_invoice(self, **kwargs):
         """
-        submit_invoice(self, **kwargs) -> ApiResponse
+        submit_invoice(self, **kwargs)
 
         Submits one or more invoices for a vendor's direct fulfillment orders.
 

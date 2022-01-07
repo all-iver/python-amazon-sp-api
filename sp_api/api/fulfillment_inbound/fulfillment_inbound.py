@@ -6,7 +6,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/itemsGuidance")
     def item_guidance(self, **kwargs):
         """
-        item_guidance(self, **kwargs) -> ApiResponse
+        item_guidance(self, **kwargs)
 
         Examples:
             literal blocks::
@@ -24,7 +24,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/plans", method="POST")
     def plans(self, data, **kwargs):
         """
-        plans(self, data, **kwargs) -> ApiResponse
+        plans(self, data, **kwargs)
 
         Examples:
             literal blocks::
@@ -67,7 +67,7 @@ class FulfillmentInbound(Client):
         Returns:
             ApiResponse
         """
-        return self._request(kwargs.pop("path"), data={**data, **kwargs})
+        return self._request(kwargs.pop("path"), data=dict(data, **kwargs))
 
     @sp_endpoint("/fba/inbound/v0/shipments/{}", method="POST")
     def create_shipment(self, shipment_id, data, **kwargs):
@@ -124,13 +124,13 @@ class FulfillmentInbound(Client):
             ApiResponse
         """
         return self._request(
-            fill_query_params(kwargs.pop("path"), shipment_id), data={**data, **kwargs}
+            fill_query_params(kwargs.pop("path"), shipment_id), data=dict(data, **kwargs)
         )
 
     @sp_endpoint("/fba/inbound/v0/shipments/{}", method="PUT")
     def update_shipment(self, shipment_id, data, **kwargs):
         """
-        update_shipment(self, shipment_id, data, **kwargs) -> ApiResponse
+        update_shipment(self, shipment_id, data, **kwargs)
 
         Examples:
             literal blocks::
@@ -170,13 +170,13 @@ class FulfillmentInbound(Client):
             ApiResponse
         """
         return self._request(
-            fill_query_params(kwargs.pop("path"), shipment_id), data={**data, **kwargs}
+            fill_query_params(kwargs.pop("path"), shipment_id), data=dict(data, **kwargs)
         )
 
     @sp_endpoint("/fba/inbound/v0/shipments/{}/preorder")
     def preorder(self, shipment_id, **kwargs):
         """
-        preorder(self, shipment_id, **kwargs) -> ApiResponse
+        preorder(self, shipment_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -213,7 +213,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/prepInstructions")
     def prep_instruction(self, data, **kwargs):
         """
-        prep_instruction(self, data, **kwargs) -> ApiResponse
+        prep_instruction(self, data, **kwargs)
 
         Examples:
             literal blocks::
@@ -227,12 +227,12 @@ class FulfillmentInbound(Client):
         Returns:
             ApiResponse
         """
-        return self._request(kwargs.pop("path"), params={**data, **kwargs})
+        return self._request(kwargs.pop("path"), params=dict(data, **kwargs))
 
     @sp_endpoint("/fba/inbound/v0/shipments/{}/transport")
     def get_transport_information(self, shipment_id, **kwargs):
         """
-        get_transport_information(self, shipment_id, **kwargs) -> ApiResponse
+        get_transport_information(self, shipment_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -253,7 +253,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipments/{}/transport", method="PUT")
     def update_transport_information(self, shipment_id, **kwargs):
         """
-        update_transport_information(self, shipment_id, **kwargs) -> ApiResponse
+        update_transport_information(self, shipment_id, **kwargs)
 
         Args:
             shipment_id:
@@ -269,7 +269,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipments/{}/transport/void", method="POST")
     def void_transport(self, shipment_id, **kwargs):
         """
-        void_transport(self, shipment_id, **kwargs) -> ApiResponse
+        void_transport(self, shipment_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -292,7 +292,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipments/{}/transport/estimate", method="POST")
     def estimate_transport(self, shipment_id, **kwargs):
         """
-        estimate_transport(self, shipment_id, **kwargs) -> ApiResponse
+        estimate_transport(self, shipment_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -341,7 +341,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipments/{}/billOfLading")
     def bill_of_lading(self, shipment_id, **kwargs):
         """
-        bill_of_lading(self, shipment_id, **kwargs) -> ApiResponse
+        bill_of_lading(self, shipment_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -362,7 +362,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipments")
     def get_shipments(self, **kwargs):
         """
-        get_shipments(self, **kwargs) -> ApiResponse
+        get_shipments(self, **kwargs)
 
         Examples:
             literal blocks::
@@ -380,7 +380,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipments/{}/items")
     def shipment_items_by_shipment(self, shipment_id, **kwargs):
         """
-        shipment_items_by_shipment(self, shipment_id, **kwargs) -> ApiResponse
+        shipment_items_by_shipment(self, shipment_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -401,7 +401,7 @@ class FulfillmentInbound(Client):
     @sp_endpoint("/fba/inbound/v0/shipmentItems")
     def shipment_items(self, **kwargs):
         """
-        shipment_items(self, **kwargs) -> ApiResponse
+        shipment_items(self, **kwargs)
 
         Examples:
             literal blocks::

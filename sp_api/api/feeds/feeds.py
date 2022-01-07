@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 import zlib
 
 import requests
@@ -15,9 +15,9 @@ class Feeds(Client):
     """
 
     @sp_endpoint('/feeds/2021-06-30/feeds', method='GET')
-    def get_feeds(self, **kwargs) -> ApiResponse:
+    def get_feeds(self, **kwargs):
         """
-        get_feeds(self, **kwargs) -> ApiResponse
+        get_feeds(self, **kwargs)
 
         Returns feed details for the feeds that match the filters that you specify.
 
@@ -37,7 +37,7 @@ class Feeds(Client):
 
         return self._request(kwargs.pop('path'), params=kwargs)
 
-    def submit_feed(self, feed_type, file, content_type='text/tsv', **kwargs) -> [ApiResponse, ApiResponse]:
+    def submit_feed(self, feed_type, file, content_type='text/tsv', **kwargs):
         """
         submit_feed(self, feed_type: str, file: File or File like, content_type='text/tsv', **kwargs) -> [ApiResponse, ApiResponse]
         Combines `create_feed_document` and `create_feed`, uploads the file and sends the feed to amazon.
@@ -72,9 +72,9 @@ class Feeds(Client):
         return document_response, self.create_feed(feed_type, document_response.payload.get('feedDocumentId'), **kwargs)
 
     @sp_endpoint('/feeds/2021-06-30/feeds', method='POST')
-    def create_feed(self, feed_type, input_feed_document_id, **kwargs) -> ApiResponse:
+    def create_feed(self, feed_type, input_feed_document_id, **kwargs):
         """
-        create_feed(self, feed_type: str, input_feed_document_id: str, **kwargs) -> ApiResponse
+        create_feed(self, feed_type: str, input_feed_document_id: str, **kwargs)
 
         Creates a feed. Call `create_feed_document` to upload the feed first.
         `submit_feed` combines both.
@@ -106,14 +106,14 @@ class Feeds(Client):
         data = {
             'feedType': feed_type,
             'inputFeedDocumentId': input_feed_document_id,
-            **kwargs
         }
+        data.update(kwargs)
         return self._request(kwargs.pop('path'), data=data)
 
     @sp_endpoint('/feeds/2021-06-30/feeds/{}', method='DELETE')
-    def cancel_feed(self, feedId, **kwargs) -> ApiResponse:
+    def cancel_feed(self, feedId, **kwargs):
         """
-        cancel_feed(self, feedId, **kwargs) -> ApiResponse
+        cancel_feed(self, feedId, **kwargs)
 
         Cancels the feed that you specify. Only feeds with processingStatus=IN_QUEUE can be cancelled. Cancelled feeds are returned in subsequent calls to the getFeed and getFeeds operations.
 
@@ -129,9 +129,9 @@ class Feeds(Client):
         return self._request(fill_query_params(kwargs.pop('path'), feedId), data=kwargs)
 
     @sp_endpoint('/feeds/2021-06-30/feeds/{}', method='GET')
-    def get_feed(self, feedId, **kwargs) -> ApiResponse:
+    def get_feed(self, feedId, **kwargs):
         """
-        get_feed(self, feedId, **kwargs) -> ApiResponse
+        get_feed(self, feedId, **kwargs)
 
         Returns feed details (including the resultDocumentId, if available) for the feed that you specify.
 
@@ -147,9 +147,9 @@ class Feeds(Client):
         return self._request(fill_query_params(kwargs.pop('path'), feedId), params=kwargs, add_marketplace=False)
 
     @sp_endpoint('/feeds/2021-06-30/documents', method='POST')
-    def create_feed_document(self, file, content_type, **kwargs) -> ApiResponse:
+    def create_feed_document(self, file, content_type, **kwargs):
         """
-        create_feed_document(self, **kwargs) -> ApiResponse
+        create_feed_document(self, **kwargs)
 
         Creates a feed document for the feed type that you specify. This operation returns a presigned URL for uploading the feed document contents. It also returns a feedDocumentId value that you can pass in with a subsequent call to the createFeed operation.
 
@@ -167,7 +167,7 @@ class Feeds(Client):
         data = {
             'contentType': kwargs.get('contentType', content_type)
         }
-        response = self._request(kwargs.get('path'), data={**data, **kwargs})
+        response = self._request(kwargs.get('path'), data=dict(data, **kwargs))
         upload = requests.put(
             response.payload.get('url'),
             data=file.read().decode('iso-8859-1'),
@@ -179,9 +179,9 @@ class Feeds(Client):
         raise SellingApiException(headers=upload.headers, error=upload.json().get('errors'))
 
     @sp_endpoint('/feeds/2021-06-30/documents/{}', method='GET')
-    def get_feed_document(self, feedDocumentId, **kwargs) -> str:
+    def get_feed_document(self, feedDocumentId, **kwargs):
         """
-        get_feed_document(self, feedDocumentId, **kwargs) -> ApiResponse
+        get_feed_document(self, feedDocumentId, **kwargs)
 
         Returns the information required for retrieving a feed document's contents.
 
@@ -199,7 +199,7 @@ class Feeds(Client):
         return self.get_feed_result_document(feedDocumentId)
 
     @sp_endpoint('/feeds/2021-06-30/documents/{}', method='GET')
-    def get_feed_result_document(self, feedDocumentId, **kwargs) -> str:
+    def get_feed_result_document(self, feedDocumentId, **kwargs):
         """
         get_feed_result_document(self, feedDocumentId, **kwargs) -> str
 

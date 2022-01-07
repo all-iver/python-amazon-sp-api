@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -14,9 +14,9 @@ For more information, see the [Listings Items API Use Case Guide](https://github
     """
 
     @sp_endpoint('/listings/2021-08-01/items/{}/{}', method='DELETE')
-    def delete_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse:
+    def delete_listings_item(self, sellerId, sku, **kwargs):
         """
-        delete_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse
+        delete_listings_item(self, sellerId, sku, **kwargs)
         Delete a listings item for a selling partner.
         **Usage Plans:**
         ======================================  ==============
@@ -37,9 +37,9 @@ For more information, see the [Listings Items API Use Case Guide](https://github
         return self._request(fill_query_params(kwargs.pop('path'), sellerId, sku), data=kwargs)
 
     @sp_endpoint('/listings/2021-08-01/items/{}/{}', method='GET')
-    def get_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse:
+    def get_listings_item(self, sellerId, sku, **kwargs):
         """
-        get_listings_item(self, sellerId, **kwargs) -> ApiResponse
+        get_listings_item(self, sellerId, **kwargs)
         Returns details about a listings item for a selling partner.
         **Usage Plan:**
         ======================================  ==============
@@ -61,9 +61,9 @@ For more information, see the [Listings Items API Use Case Guide](https://github
         return self._request(fill_query_params(kwargs.pop('path'), sellerId, sku), params=kwargs)
 
     @sp_endpoint('/listings/2021-08-01/items/{}/{}', method='PATCH')
-    def patch_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse:
+    def patch_listings_item(self, sellerId, sku, **kwargs):
         """
-        patch_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse
+        patch_listings_item(self, sellerId, sku, **kwargs)
         Partially update (patch) a listings item for a selling partner. Only top-level listings item attributes can be patched. Patching nested attributes is not supported.
         **Usage Plans:**
         ======================================  ==============
@@ -96,9 +96,9 @@ For more information, see the [Listings Items API Use Case Guide](https://github
         return self._request(fill_query_params(kwargs.pop('path'), sellerId, sku), data=kwargs.pop('body'), params=kwargs)
 
     @sp_endpoint('/listings/2021-08-01/items/{}/{}', method='PUT')
-    def put_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse:
+    def put_listings_item(self, sellerId, sku, **kwargs):
         """
-        put_listings_item(self, sellerId, sku, **kwargs) -> ApiResponse
+        put_listings_item(self, sellerId, sku, **kwargs)
         Creates a new or fully-updates an existing listings item for a selling partner.
         **Usage Plans:**
         ======================================  ==============

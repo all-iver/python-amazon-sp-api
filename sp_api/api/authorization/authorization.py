@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class Authorization(Client):
     grantless_scope = 'sellingpartnerapi::migration'
 
     @sp_endpoint('/authorization/v1/authorizationCode', method='GET')
-    def get_authorization_code(self, **kwargs) -> ApiResponse:
+    def get_authorization_code(self, **kwargs):
         """
-        get_authorization_code(self, **kwargs) -> ApiResponse
+        get_authorization_code(self, **kwargs)
 
         With the getAuthorizationCode operation, you can request a Login With Amazon (LWA) authorization code that will allow you to call a Selling Partner API on behalf of a seller who has already authorized you to call Amazon Marketplace Web Service (Amazon MWS). You specify a developer ID, an MWS auth token, and a seller ID. Taken together, these represent the Amazon MWS authorization that the seller previously granted you. The operation returns an LWA authorization code that can be exchanged for a refresh token and access token representing authorization to call the Selling Partner API on the seller's behalf. By using this API, sellers who have already authorized you for Amazon MWS do not need to re-authorize you for the Selling Partner API.
 

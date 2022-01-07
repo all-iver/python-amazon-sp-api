@@ -8,10 +8,10 @@ class ProductFees(Client):
     """
 
     @sp_endpoint('/products/fees/v0/listings/{}/feesEstimate', method='POST')
-    def get_product_fees_estimate_for_sku(self, seller_sku, price: float, shipping_price=None, currency='USD',
-                                          is_fba=False, points: dict = None, **kwargs) -> ApiResponse:
+    def get_product_fees_estimate_for_sku(self, seller_sku, price, shipping_price=None, currency='USD',
+                                          is_fba=False, points=None, **kwargs):
         """
-        get_product_fees_estimate_for_sku(self, seller_sku, price: float, shipping_price=None, currency='USD', is_fba=False, points: dict = dict, **kwargs) -> ApiResponse
+        get_product_fees_estimate_for_sku(self, seller_sku, price: float, shipping_price=None, currency='USD', is_fba=False, points: dict = dict, **kwargs)
 
         Returns fees for sku
 
@@ -44,11 +44,11 @@ class ProductFees(Client):
         return self._request(fill_query_params(kwargs.pop('path'), seller_sku), data=kwargs)
 
     @sp_endpoint('/products/fees/v0/items/{}/feesEstimate', method='POST')
-    def get_product_fees_estimate_for_asin(self, asin, price: float, currency='USD', shipping_price=None, is_fba=False,
-                                           points: dict = None,
-                                           **kwargs) -> ApiResponse:
+    def get_product_fees_estimate_for_asin(self, asin, price, currency='USD', shipping_price=None, is_fba=False,
+                                           points=None,
+                                           **kwargs):
         """
-        get_product_fees_estimate_for_asin(self, asin, price: float, currency='USD', shipping_price=None, is_fba=False,  points: dict = dict, **kwargs) -> ApiResponse
+        get_product_fees_estimate_for_asin(self, asin, price: float, currency='USD', shipping_price=None, is_fba=False,  points: dict = dict, **kwargs)
 
         Returns fees for asin
 
@@ -80,7 +80,7 @@ class ProductFees(Client):
         kwargs.update(self._create_body(price, shipping_price, currency, is_fba, asin, points))
         return self._request(fill_query_params(kwargs.pop('path'), asin), data=kwargs)
 
-    def _create_body(self, price, shipping_price=None, currency='USD', is_fba=False, identifier=None, points: dict=None):
+    def _create_body(self, price, shipping_price=None, currency='USD', is_fba=False, identifier=None, points=None):
         """
         Create request body
 

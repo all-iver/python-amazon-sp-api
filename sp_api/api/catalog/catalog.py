@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -10,9 +10,9 @@ class Catalog(Client):
     """
 
     @sp_endpoint('/catalog/v0/items/{}')
-    def get_item(self, asin: str, **kwargs) -> ApiResponse:
+    def get_item(self, asin, **kwargs):
         """
-        get_item(self, asin: str, **kwargs) -> ApiResponse
+        get_item(self, asin: str, **kwargs)
         Returns a specified item and its attributes.
 
         **Usage Plan:**
@@ -41,9 +41,9 @@ class Catalog(Client):
         return self._request(fill_query_params(kwargs.pop('path'), asin), params=kwargs)
 
     @sp_endpoint('/catalog/v0/items')
-    def list_items(self, **kwargs) -> ApiResponse:
+    def list_items(self, **kwargs):
         """
-        list_items(self, **kwargs) -> ApiResponse
+        list_items(self, **kwargs)
         Returns a list of items and their attributes, based on a search query or item identifiers that you specify. When based on a search query, provide the Query parameter and optionally, the QueryContextId parameter. When based on item identifiers, provide a single appropriate parameter based on the identifier type, and specify the associated item value. MarketplaceId is always required.
 
         **Usage Plan:**
@@ -80,9 +80,9 @@ class Catalog(Client):
         return self._request(kwargs.pop('path'), params=kwargs)
 
     @sp_endpoint('/catalog/v0/categories')
-    def list_categories(self, **kwargs) -> ApiResponse:
+    def list_categories(self, **kwargs):
         """
-        list_categories(self, **kwargs) -> ApiResponse
+        list_categories(self, **kwargs)
         Returns the parent categories to which an item belongs, based on the specified ASIN or SellerSKU
 
         **Usage Plan:**

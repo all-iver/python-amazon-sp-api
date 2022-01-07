@@ -36,7 +36,7 @@ class AccessTokenClient(BaseClient):
             raise AuthorizationError(error_code, error_message, response.status_code)
         return response_data
 
-    def get_auth(self) -> AccessTokenResponse:
+    def get_auth(self):
         """
         Get's the access token
         :return:AccessTokenResponse
@@ -108,7 +108,7 @@ class AccessTokenClient(BaseClient):
             'client_secret': self.cred.client_secret
         }
 
-    def grantless_data(self, scope_value: str):
+    def grantless_data(self, scope_value):
         return {
             'grant_type': 'client_credentials',
             'client_id': self.cred.client_id,

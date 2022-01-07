@@ -5,9 +5,9 @@ from sp_api.base import sp_endpoint, fill_query_params
 class Finances(Client):
 
     @sp_endpoint('/finances/v0/orders/{}/financialEvents')
-    def get_financial_events_for_order(self, order_id, **kwargs) -> ApiResponse:
+    def get_financial_events_for_order(self, order_id, **kwargs):
         """
-        get_financial_events_for_order(self, order_id, **kwargs) -> ApiResponse
+        get_financial_events_for_order(self, order_id, **kwargs)
 
         Examples:
             literal blocks::
@@ -21,12 +21,12 @@ class Finances(Client):
         Returns:
 
         """
-        return self._request(fill_query_params(kwargs.pop('path'), order_id), params={**kwargs})
+        return self._request(fill_query_params(kwargs.pop('path'), order_id), dict(kwargs))
 
     @sp_endpoint('/finances/v0/financialEvents')
-    def list_financial_events(self, **kwargs) -> ApiResponse:
+    def list_financial_events(self, **kwargs):
         """
-        list_financial_events(self, **kwargs) -> ApiResponse:
+        list_financial_events(self, **kwargs):
 
 
         Args:
@@ -35,12 +35,12 @@ class Finances(Client):
         Returns:
 
         """
-        return self._request(fill_query_params(kwargs.pop('path')), params={**kwargs})
+        return self._request(fill_query_params(kwargs.pop('path')), dict(kwargs))
 
     @sp_endpoint('/finances/v0/financialEventGroups/{}/financialEvents')
-    def list_financial_events_by_group_id(self, event_group_id,  **kwargs) -> ApiResponse:
+    def list_financial_events_by_group_id(self, event_group_id,  **kwargs):
         """
-        list_financial_events_by_groupid(self, event_group_id,  **kwargs) -> ApiResponse:
+        list_financial_events_by_groupid(self, event_group_id,  **kwargs):
 
 
         Args:
@@ -50,12 +50,12 @@ class Finances(Client):
         Returns:
 
         """
-        return self._request(fill_query_params(kwargs.pop('path'), event_group_id), params={**kwargs})
+        return self._request(fill_query_params(kwargs.pop('path'), event_group_id), dict(kwargs))
 
     @sp_endpoint('/finances/v0/financialEventGroups')
-    def list_financial_event_groups(self, **kwargs) -> ApiResponse:
+    def list_financial_event_groups(self, **kwargs):
         """
-        list_financial_event_groups(self, **kwargs) -> ApiResponse:
+        list_financial_event_groups(self, **kwargs):
 
 
         Args:
@@ -64,5 +64,5 @@ class Finances(Client):
         Returns:
 
         """
-        return self._request(kwargs.pop('path'), params={**kwargs})
+        return self._request(kwargs.pop('path'), dict(kwargs))
 

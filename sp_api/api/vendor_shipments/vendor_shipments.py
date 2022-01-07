@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class VendorShipments(Client):
 
 
     @sp_endpoint('/vendor/shipping/v1/shipmentConfirmations', method='POST')
-    def submit_shipment_confirmations(self, **kwargs) -> ApiResponse:
+    def submit_shipment_confirmations(self, **kwargs):
         """
-        submit_shipment_confirmations(self, **kwargs) -> ApiResponse
+        submit_shipment_confirmations(self, **kwargs)
 
         Submits one or more shipment confirmations for vendor orders.
 

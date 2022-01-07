@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class Shipping(Client):
 
 
     @sp_endpoint('/shipping/v1/shipments', method='POST')
-    def create_shipment(self, **kwargs) -> ApiResponse:
+    def create_shipment(self, **kwargs):
         """
-        create_shipment(self, **kwargs) -> ApiResponse
+        create_shipment(self, **kwargs)
 
         Create a new shipment.
 
@@ -105,9 +105,9 @@ class Shipping(Client):
         return self._request(kwargs.pop('path'),  data=kwargs)
 
     @sp_endpoint('/shipping/v1/shipments/{}', method='GET')
-    def get_shipment(self, shipmentId, **kwargs) -> ApiResponse:
+    def get_shipment(self, shipmentId, **kwargs):
         """
-        get_shipment(self, shipmentId, **kwargs) -> ApiResponse
+        get_shipment(self, shipmentId, **kwargs)
 
         Return the entire shipment object for the shipmentId.
 
@@ -131,9 +131,9 @@ class Shipping(Client):
         return self._request(fill_query_params(kwargs.pop('path'), shipmentId), params=kwargs)
 
     @sp_endpoint('/shipping/v1/shipments/{}/cancel', method='POST')
-    def cancel_shipment(self, shipmentId, **kwargs) -> ApiResponse:
+    def cancel_shipment(self, shipmentId, **kwargs):
         """
-        cancel_shipment(self, shipmentId, **kwargs) -> ApiResponse
+        cancel_shipment(self, shipmentId, **kwargs)
 
         Cancel a shipment by the given shipmentId.
 
@@ -159,9 +159,9 @@ class Shipping(Client):
     
 
     @sp_endpoint('/shipping/v1/shipments/{}/purchaseLabels', method='POST')
-    def purchase_labels(self, shipmentId, **kwargs) -> ApiResponse:
+    def purchase_labels(self, shipmentId, **kwargs):
         """
-        purchase_labels(self, shipmentId, **kwargs) -> ApiResponse
+        purchase_labels(self, shipmentId, **kwargs)
 
         Purchase shipping labels based on a given rate.
 
@@ -195,9 +195,9 @@ class Shipping(Client):
     
 
     @sp_endpoint('/shipping/v1/shipments/{}/label', method='POST')
-    def retrieve_shipping_label(self, shipmentId, **kwargs) -> ApiResponse:
+    def retrieve_shipping_label(self, shipmentId, **kwargs):
         """
-        retrieve_shipping_label(self, shipmentId, **kwargs) -> ApiResponse
+        retrieve_shipping_label(self, shipmentId, **kwargs)
 
         Retrieve shipping label based on the shipment id and tracking id.
 
@@ -229,9 +229,9 @@ class Shipping(Client):
     
 
     @sp_endpoint('/shipping/v1/purchaseShipment', method='POST')
-    def purchase_shipment(self, **kwargs) -> ApiResponse:
+    def purchase_shipment(self, **kwargs):
         """
-        purchase_shipment(self, **kwargs) -> ApiResponse
+        purchase_shipment(self, **kwargs)
 
         Purchase shipping labels.
 
@@ -328,9 +328,9 @@ class Shipping(Client):
     
 
     @sp_endpoint('/shipping/v1/rates', method='POST')
-    def get_rates(self, **kwargs) -> ApiResponse:
+    def get_rates(self, **kwargs):
         """
-        get_rates(self, **kwargs) -> ApiResponse
+        get_rates(self, **kwargs)
 
         Get service rates.
 
@@ -404,9 +404,9 @@ class Shipping(Client):
     
 
     @sp_endpoint('/shipping/v1/account', method='GET')
-    def get_account(self, **kwargs) -> ApiResponse:
+    def get_account(self, **kwargs):
         """
-        get_account(self, **kwargs) -> ApiResponse
+        get_account(self, **kwargs)
 
         Verify if the current account is valid.
 
@@ -428,9 +428,9 @@ class Shipping(Client):
     
 
     @sp_endpoint('/shipping/v1/tracking/{}', method='GET')
-    def get_tracking_information(self, trackingId, **kwargs) -> ApiResponse:
+    def get_tracking_information(self, trackingId, **kwargs):
         """
-        get_tracking_information(self, trackingId, **kwargs) -> ApiResponse
+        get_tracking_information(self, trackingId, **kwargs)
 
         Return the tracking information of a shipment.
 

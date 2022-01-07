@@ -42,7 +42,7 @@ def create_md5(file):
     return hash_md5.hexdigest()
 
 
-def nest_dict(flat: dict()):
+def nest_dict(flat):
     """
     Convert flat dictionary to nested dictionary.
 
@@ -77,9 +77,10 @@ def nest_dict(flat: dict()):
 
 
 def _nest_dict_rec(k, v, out):
-    k, *rest = k.split('.', 1)
+    # FIXME - python2 note - is this working as intended?  is the original?
+    k, rest = k.split('.', 1)
     if rest:
-        _nest_dict_rec(rest[0], v, out.setdefault(k, {}))
+        _nest_dict_rec(rest, v, out.setdefault(k, {}))
     else:
         out[k] = v
 

@@ -36,13 +36,13 @@ class KeyMaker:
             {'sku': 1, 'title': {'sku': ['seller_sku', 3, {'sku': 22, 'title': {'title': 'Foo', 'x': 'bar'}}]}}
     """
 
-    def __init__(self, key_mapping=None, *, deep=True):
+    def __init__(self, key_mapping=None, deep=True):
         if key_mapping is None:
             key_mapping = {}
         self.key_mapping = key_mapping
         self.deep = deep
 
-    def convert_keys(self, data: dict or list):
+    def convert_keys(self, data):
         """
         convert_keys(self, data: dict or list)
 

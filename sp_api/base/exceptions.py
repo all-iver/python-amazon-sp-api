@@ -95,7 +95,7 @@ class MissingScopeException(Exception):
     pass
 
 
-def get_exception_for_code(code: int):
+def get_exception_for_code(code):
     return {
         400: SellingApiBadRequestException,
         403: SellingApiForbiddenException,

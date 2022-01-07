@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class VendorDirectFulfillmentOrders(Client):
 
 
     @sp_endpoint('/vendor/directFulfillment/orders/v1/purchaseOrders', method='GET')
-    def get_orders(self, **kwargs) -> ApiResponse:
+    def get_orders(self, **kwargs):
         """
-        get_orders(self, **kwargs) -> ApiResponse
+        get_orders(self, **kwargs)
 
         Returns a list of purchase orders created during the time frame that you specify. You define the time frame using the createdAfter and createdBefore parameters. You must use both parameters. You can choose to get only the purchase order numbers by setting the includeDetails parameter to false. In that case, the operation returns a list of purchase order numbers. You can then call the getOrder operation to return the details of a specific order.
 
@@ -47,9 +47,9 @@ class VendorDirectFulfillmentOrders(Client):
     
 
     @sp_endpoint('/vendor/directFulfillment/orders/v1/purchaseOrders/{}', method='GET')
-    def get_order(self, purchaseOrderNumber, **kwargs) -> ApiResponse:
+    def get_order(self, purchaseOrderNumber, **kwargs):
         """
-        get_order(self, purchaseOrderNumber, **kwargs) -> ApiResponse
+        get_order(self, purchaseOrderNumber, **kwargs)
 
         Returns purchase order information for the purchaseOrderNumber that you specify.
 
@@ -74,9 +74,9 @@ class VendorDirectFulfillmentOrders(Client):
     
 
     @sp_endpoint('/vendor/directFulfillment/orders/v1/acknowledgements', method='POST')
-    def submit_acknowledgement(self, **kwargs) -> ApiResponse:
+    def submit_acknowledgement(self, **kwargs):
         """
-        submit_acknowledgement(self, **kwargs) -> ApiResponse
+        submit_acknowledgement(self, **kwargs)
 
         Submits acknowledgements for one or more purchase orders.
 

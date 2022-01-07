@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 import json
 import os
 
@@ -21,12 +22,12 @@ class MissingCredentials(Exception):
     pass
 
 
-class BaseCredentialProvider:
+class BaseCredentialProvider(object):
     errors = []
     credentials = None
 
-    def __init__(self, account: str = 'default', *args, **kwargs):
-        self.account = account
+    def __init__(self, account, *args, **kwargs):
+        self.account = account or 'default'
 
     def __call__(self, *args, **kwargs):
         self.load_credentials()
@@ -50,7 +51,7 @@ class FromCodeCredentialProvider(BaseCredentialProvider):
     def load_credentials(self):
         return None
 
-    def __init__(self, credentials: dict, *args, **kwargs):
+    def __init__(self, credentials, *args, **kwargs):
         super(FromCodeCredentialProvider, self).__init__('default', credentials)
         self.credentials = credentials
 

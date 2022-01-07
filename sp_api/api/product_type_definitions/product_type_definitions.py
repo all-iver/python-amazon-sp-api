@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class ProductTypeDefinitions(Client):
 
 
     @sp_endpoint('/definitions/2020-09-01/productTypes', method='GET')
-    def search_definitions_product_types(self, **kwargs) -> ApiResponse:
+    def search_definitions_product_types(self, **kwargs):
         """
-        search_definitions_product_types(self, **kwargs) -> ApiResponse
+        search_definitions_product_types(self, **kwargs)
 
         Search for and return a list of Amazon product types that have definitions available.
 
@@ -41,9 +41,9 @@ class ProductTypeDefinitions(Client):
     
 
     @sp_endpoint('/definitions/2020-09-01/productTypes/{}', method='GET')
-    def get_definitions_product_type(self, productType, **kwargs) -> ApiResponse:
+    def get_definitions_product_type(self, productType, **kwargs):
         """
-        get_definitions_product_type(self, productType, **kwargs) -> ApiResponse
+        get_definitions_product_type(self, productType, **kwargs)
 
         Retrieve an Amazon product type definition.
 

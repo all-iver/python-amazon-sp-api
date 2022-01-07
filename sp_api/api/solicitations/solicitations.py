@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class Solicitations(Client):
 
 
     @sp_endpoint('/solicitations/v1/orders/{}', method='GET')
-    def get_solicitation_actions_for_order(self, amazonOrderId, **kwargs) -> ApiResponse:
+    def get_solicitation_actions_for_order(self, amazonOrderId, **kwargs):
         """
-        get_solicitation_actions_for_order(self, amazonOrderId, **kwargs) -> ApiResponse
+        get_solicitation_actions_for_order(self, amazonOrderId, **kwargs)
 
         Returns a list of solicitation types that are available for an order that you specify. A solicitation type is represented by an actions object, which contains a path and query parameter(s). You can use the path and parameter(s) to call an operation that sends a solicitation. Currently only the productReviewAndSellerFeedbackSolicitation solicitation type is available.
 
@@ -40,9 +40,9 @@ class Solicitations(Client):
         return self._request(fill_query_params(kwargs.pop('path'), amazonOrderId), params=kwargs)
 
     @sp_endpoint('/solicitations/v1/orders/{}/solicitations/productReviewAndSellerFeedback', method='POST')
-    def create_product_review_and_seller_feedback_solicitation(self, amazonOrderId, **kwargs) -> ApiResponse:
+    def create_product_review_and_seller_feedback_solicitation(self, amazonOrderId, **kwargs):
         """
-        create_product_review_and_seller_feedback_solicitation(self, amazonOrderId, **kwargs) -> ApiResponse
+        create_product_review_and_seller_feedback_solicitation(self, amazonOrderId, **kwargs)
 
         Sends a solicitation to a buyer asking for seller feedback and a product review for the specified order. Send only one productReviewAndSellerFeedback or free form proactive message per order.
 

@@ -9,9 +9,9 @@ class MerchantFulfillment(Client):
     """
 
     @sp_endpoint("/mfn/v0/eligibleServices", method='POST')
-    def get_eligible_shipment_services_old(self, shipment_request_details: dict, **kwargs) -> ApiResponse:
+    def get_eligible_shipment_services_old(self, shipment_request_details, **kwargs):
         """
-        get_eligible_shipment_services_old(self, shipment_request_details: dict, **kwargs) -> ApiResponse
+        get_eligible_shipment_services_old(self, shipment_request_details: dict, **kwargs)
         Returns a list of shipping service offers that satisfy the specified shipment request details.
 
         **Usage Plan:**
@@ -71,15 +71,15 @@ class MerchantFulfillment(Client):
         # GetEligibleShipmentServicesRequest
         data = {
             "ShipmentRequestDetails": shipment_request_details,
-            **kwargs
         }
+        data.update(kwargs)
 
         return self._request(kwargs.pop('path'), data=data)
 
     @sp_endpoint("/mfn/v0/eligibleShippingServices", method='POST')
-    def get_eligible_shipment_services(self, shipment_request_details: dict, **kwargs) -> ApiResponse:
+    def get_eligible_shipment_services(self, shipment_request_details, **kwargs):
         """
-        get_eligible_shipment_services(self, shipment_request_details: dict, **kwargs) -> ApiResponse
+        get_eligible_shipment_services(self, shipment_request_details: dict, **kwargs)
         Returns a list of shipping service offers that satisfy the specified shipment request details.
 
         **Usage Plan:**
@@ -140,15 +140,15 @@ class MerchantFulfillment(Client):
         # GetEligibleShipmentServicesRequest
         data = {
             "ShipmentRequestDetails": shipment_request_details,
-            **kwargs
         }
+        data.update(kwargs)
 
         return self._request(kwargs.pop('path'), data=data)
 
     @sp_endpoint("/mfn/v0/shipments/{}")
-    def get_shipment(self, shipment_id: str, **kwargs) -> ApiResponse:
+    def get_shipment(self, shipment_id, **kwargs):
         """
-        get_shipment(self, shipmentId:str) -> ApiResponse
+        get_shipment(self, shipmentId:str)
         Returns a specified item and its attributes.
 
         **Usage Plan:**
@@ -175,9 +175,9 @@ class MerchantFulfillment(Client):
         return self._request(fill_query_params(kwargs.pop('path'), shipment_id), params=kwargs, add_marketplace=False)
 
     @sp_endpoint("/mfn/v0/shipments/{}", method='DELETE')
-    def cancel_shipment(self, shipment_id: str, **kwargs) -> ApiResponse:
+    def cancel_shipment(self, shipment_id, **kwargs):
         """
-        cancel_shipment(self, shipment_id: str, **kwargs) -> ApiResponse
+        cancel_shipment(self, shipment_id: str, **kwargs)
         Cancel the shipment indicated by the specified shipment identifier.
 
         **Usage Plan:**
@@ -199,9 +199,9 @@ class MerchantFulfillment(Client):
         return self._request(fill_query_params(kwargs.pop('path'), shipment_id), params=kwargs, add_marketplace=False)
 
     @sp_endpoint("/mfn/v0/shipments/{}/cancel", method='PUT')
-    def cancel_shipment_old(self, shipment_id: str, **kwargs) -> ApiResponse:
+    def cancel_shipment_old(self, shipment_id, **kwargs):
         """
-        cancel_shipment_old(self, shipment_id: str, **kwargs) -> ApiResponse
+        cancel_shipment_old(self, shipment_id: str, **kwargs)
         Cancel the shipment indicated by the specified shipment identifer.
 
         **Usage Plan:**
@@ -223,9 +223,9 @@ class MerchantFulfillment(Client):
         return self._request(fill_query_params(kwargs.pop('path'), shipment_id), params=kwargs, add_marketplace=False)
 
     @sp_endpoint("/mfn/v0/shipments", method='POST')
-    def create_shipment(self, shipment_request_details: dict, shipping_service_id: str, **kwargs) -> ApiResponse:
+    def create_shipment(self, shipment_request_details, shipping_service_id, **kwargs):
         """
-        create_shipment(self, shipment_request_details: dict, shipping_service_id: str, **kwargs) -> ApiResponse
+        create_shipment(self, shipment_request_details: dict, shipping_service_id: str, **kwargs)
         Create a shipment with the information provided.
 
         **Usage Plan:**
@@ -295,16 +295,16 @@ class MerchantFulfillment(Client):
         data = {
             "ShipmentRequestDetails": shipment_request_details,
             "ShippingServiceId": shipping_service_id,
-            **kwargs
         }
+        data.update(kwargs)
         return self._request(kwargs.pop('path'), data=data, add_marketplace=False)
 
     @sp_endpoint("/mfn/v0/sellerInputs", method='POST')
-    def get_additional_seller_inputs_old(self, shipping_service_id: str,  ship_from_address: dict,
-                                         order_id: str, **kwargs) -> ApiResponse:
+    def get_additional_seller_inputs_old(self, shipping_service_id,  ship_from_address,
+                                         order_id, **kwargs):
         """
         get_additional_seller_inputs_old(self, shipping_service_id: str,  ship_from_address: dict, order_id: str,
-        **kwargs) -> ApiResponse
+        **kwargs)
         Get a list of additional seller inputs required for a ship method. This is generally
         used for international shipping.
 
@@ -335,11 +335,11 @@ class MerchantFulfillment(Client):
         return self._request(kwargs.pop('path'), data=data, add_marketplace=False)
 
     @sp_endpoint("/mfn/v0/additionalSellerInputs", method='POST')
-    def get_additional_seller_inputs(self, shipping_service_id: str, ship_from_address: dict,
-                                     order_id: str, **kwargs) -> ApiResponse:
+    def get_additional_seller_inputs(self, shipping_service_id, ship_from_address,
+                                     order_id, **kwargs):
         """
         get_additional_seller_inputs(self, shipping_service_id: str,  ship_from_address: dict, order_id: str,
-        **kwargs) -> ApiResponse
+        **kwargs)
         Gets a list of additional seller inputs required for a ship method. This is
         generally used for international shipping.
 

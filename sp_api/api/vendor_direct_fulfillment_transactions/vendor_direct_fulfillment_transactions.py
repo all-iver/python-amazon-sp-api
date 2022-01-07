@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class VendorDirectFulfillmentTransactions(Client):
 
 
     @sp_endpoint('/vendor/directFulfillment/transactions/v1/transactions/{}', method='GET')
-    def get_transaction_status(self, transactionId, **kwargs) -> ApiResponse:
+    def get_transaction_status(self, transactionId, **kwargs):
         """
-        get_transaction_status(self, transactionId, **kwargs) -> ApiResponse
+        get_transaction_status(self, transactionId, **kwargs)
 
         Returns the status of the transaction indicated by the specified transactionId.
 

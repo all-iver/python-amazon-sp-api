@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 Country	marketplaceId	Country code
 Canada	A2EUQ1WTGCTBG2	CA

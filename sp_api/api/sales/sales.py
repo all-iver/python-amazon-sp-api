@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import urllib
 from datetime import datetime
 
@@ -11,9 +12,9 @@ class Sales(Client):
     """
 
     @sp_endpoint('/sales/v1/orderMetrics')
-    def get_order_metrics(self, interval: tuple, granularity: Granularity, granularityTimeZone: str = None, **kwargs) -> ApiResponse:
+    def get_order_metrics(self, interval, granularity, granularityTimeZone=None, **kwargs):
         """
-        get_order_metrics(self, interval: tuple, granularity: Granularity, granularityTimeZone: str = None, **kwargs) -> ApiResponse
+        get_order_metrics(self, interval: tuple, granularity: Granularity, granularityTimeZone: str = None, **kwargs)
 
         Returns aggregated order metrics for given interval, broken down by granularity, for given buyer type.
 
@@ -66,7 +67,7 @@ class Sales(Client):
         return self._request(kwargs.pop('path'), params=kwargs)
 
     @staticmethod
-    def _create_datetime_stamp(datetime_obj: datetime or str):
+    def _create_datetime_stamp(datetime_obj):
         """
         Create datetimestring
 

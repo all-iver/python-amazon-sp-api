@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -12,9 +12,9 @@ class Messaging(Client):
     """
 
     @sp_endpoint('/messaging/v1/orders/{}', method='GET')
-    def get_messaging_actions_for_order(self, order_id, **kwargs) -> ApiResponse:
+    def get_messaging_actions_for_order(self, order_id, **kwargs):
         """
-        get_messaging_actions_for_order(self, order_id, **kwargs) -> ApiResponse
+        get_messaging_actions_for_order(self, order_id, **kwargs)
 
         Returns a list of message types that are available for an order that you specify. A message type is represented by an actions object, which contains a path and query parameter(s). You can use the path and parameter(s) to call an operation that sends a message.
 
@@ -39,9 +39,9 @@ class Messaging(Client):
         return self._request(fill_query_params(kwargs.pop('path'), order_id), params=kwargs)
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/confirmCustomizationDetails', method='POST')
-    def confirm_customization_details(self, order_id, **kwargs) -> ApiResponse:
+    def confirm_customization_details(self, order_id, **kwargs):
         """
-        confirm_customization_details(self, order_id, **kwargs) -> ApiResponse
+        confirm_customization_details(self, order_id, **kwargs)
 
         Sends a message asking a buyer to provide or verify customization details such as name spelling, images, initials, etc.
 
@@ -76,9 +76,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/confirmDeliveryDetails', method='POST')
-    def create_confirm_delivery_details(self, order_id, **kwargs) -> ApiResponse:
+    def create_confirm_delivery_details(self, order_id, **kwargs):
         """
-        create_confirm_delivery_details(self, order_id, **kwargs) -> ApiResponse
+        create_confirm_delivery_details(self, order_id, **kwargs)
 
         Sends a message to a buyer to arrange a delivery or to confirm contact information for making a delivery.
 
@@ -108,9 +108,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/legalDisclosure', method='POST')
-    def create_legal_disclosure(self, order_id, **kwargs) -> ApiResponse:
+    def create_legal_disclosure(self, order_id, **kwargs):
         """
-        create_legal_disclosure(self, order_id, **kwargs) -> ApiResponse
+        create_legal_disclosure(self, order_id, **kwargs)
 
         Sends a critical message that contains documents that a seller is legally obligated to provide to the buyer. This message should only be used to deliver documents that are required by law.
 
@@ -145,9 +145,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/negativeFeedbackRemoval', method='POST')
-    def create_negative_feedback_removal(self, order_id, **kwargs) -> ApiResponse:
+    def create_negative_feedback_removal(self, order_id, **kwargs):
         """
-        create_negative_feedback_removal(self, order_id, **kwargs) -> ApiResponse
+        create_negative_feedback_removal(self, order_id, **kwargs)
 
         Sends a non-critical message that asks a buyer to remove their negative feedback. This message should only be sent after the seller has resolved the buyer's problem.
 
@@ -173,9 +173,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/confirmOrderDetails', method='POST')
-    def create_confirm_order_details(self, order_id, **kwargs) -> ApiResponse:
+    def create_confirm_order_details(self, order_id, **kwargs):
         """
-        create_confirm_order_details(self, order_id, **kwargs) -> ApiResponse
+        create_confirm_order_details(self, order_id, **kwargs)
 
         Sends a message to ask a buyer an order-related question prior to shipping their order.
 
@@ -204,9 +204,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/confirmServiceDetails', method='POST')
-    def create_confirm_service_details(self, order_id, **kwargs) -> ApiResponse:
+    def create_confirm_service_details(self, order_id, **kwargs):
         """
-        create_confirm_service_details(self, order_id, **kwargs) -> ApiResponse
+        create_confirm_service_details(self, order_id, **kwargs)
 
         Sends a message to contact a Home Service customer to arrange a service call or to gather information prior to a service call.
 
@@ -236,9 +236,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/amazonMotors', method='POST')
-    def create_amazon_motors(self, order_id, **kwargs) -> ApiResponse:
+    def create_amazon_motors(self, order_id, **kwargs):
         """
-        create_amazon_motors(self, order_id, **kwargs) -> ApiResponse
+        create_amazon_motors(self, order_id, **kwargs)
 
         Sends a message to a buyer to provide details about an Amazon Motors order. This message can only be sent by Amazon Motors sellers.
 
@@ -273,9 +273,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/warranty', method='POST')
-    def create_warranty(self, order_id, **kwargs) -> ApiResponse:
+    def create_warranty(self, order_id, **kwargs):
         """
-        create_warranty(self, order_id, **kwargs) -> ApiResponse
+        create_warranty(self, order_id, **kwargs)
 
         Sends a message to a buyer to provide details about warranty information on a purchase in their order.
 
@@ -313,9 +313,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/attributes', method='GET')
-    def get_attributes(self, order_id, **kwargs) -> ApiResponse:
+    def get_attributes(self, order_id, **kwargs):
         """
-        get_attributes(self, order_id, **kwargs) -> ApiResponse
+        get_attributes(self, order_id, **kwargs)
 
         Returns a response containing attributes related to an order. This includes buyer preferences.
 
@@ -337,9 +337,9 @@ class Messaging(Client):
         return self._request(fill_query_params(kwargs.pop('path'), order_id), params=kwargs)
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/digitalAccessKey', method='POST')
-    def create_digital_access_key(self, order_id, **kwargs) -> ApiResponse:
+    def create_digital_access_key(self, order_id, **kwargs):
         """
-        create_digital_access_key(self, order_id, **kwargs) -> ApiResponse
+        create_digital_access_key(self, order_id, **kwargs)
 
         Sends a message to a buyer to share a digital access key needed to utilize digital content in their order.
 
@@ -375,9 +375,9 @@ class Messaging(Client):
         )
 
     @sp_endpoint('/messaging/v1/orders/{}/messages/unexpectedProblem', method='POST')
-    def create_unexpected_problem(self, order_id, **kwargs) -> ApiResponse:
+    def create_unexpected_problem(self, order_id, **kwargs):
         """
-        create_unexpected_problem(self, order_id, **kwargs) -> ApiResponse
+        create_unexpected_problem(self, order_id, **kwargs)
 
         Sends a critical message to a buyer that an unexpected problem was encountered affecting the completion of the order.
 

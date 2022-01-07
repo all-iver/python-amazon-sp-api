@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class CatalogItems(Client):
 
 
     @sp_endpoint('/catalog/2020-12-01/items', method='GET')
-    def search_catalog_items(self, **kwargs) -> ApiResponse:
+    def search_catalog_items(self, **kwargs):
         """
-        search_catalog_items(self, **kwargs) -> ApiResponse
+        search_catalog_items(self, **kwargs)
 
         Search for and return a list of Amazon catalog items and associated information.
 
@@ -48,9 +48,9 @@ class CatalogItems(Client):
     
 
     @sp_endpoint('/catalog/2020-12-01/items/{}', method='GET')
-    def get_catalog_item(self, asin, **kwargs) -> ApiResponse:
+    def get_catalog_item(self, asin, **kwargs):
         """
-        get_catalog_item(self, asin, **kwargs) -> ApiResponse
+        get_catalog_item(self, asin, **kwargs)
 
         Retrieves details for an item in the Amazon catalog.
 

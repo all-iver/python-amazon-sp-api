@@ -4,7 +4,7 @@ import datetime
 import hashlib
 import hmac
 import logging
-import urllib.parse
+import six.moves.urllib as urllib
 from collections import OrderedDict
 from requests.auth import AuthBase
 from requests.compat import urlencode, quote, urlparse

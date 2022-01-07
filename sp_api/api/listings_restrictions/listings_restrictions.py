@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.base import Client, sp_endpoint, fill_query_params, ApiResponse
 
@@ -13,9 +13,9 @@ class ListingsRestrictions(Client):
     """
 
     @sp_endpoint('/listings/2021-08-01/restrictions', method='GET')
-    def get_listings_restrictions(self, **kwargs) -> ApiResponse:
+    def get_listings_restrictions(self, **kwargs):
         """
-        get_listings_restrictions(self, **kwargs) -> ApiResponse
+        get_listings_restrictions(self, **kwargs)
 
         Returns listing restrictions for an item in the Amazon Catalog. 
 

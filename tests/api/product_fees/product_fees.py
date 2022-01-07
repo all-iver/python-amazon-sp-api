@@ -1,4 +1,4 @@
-import urllib.parse
+import six.moves.urllib as urllib
 
 from sp_api.api import ProductFees
 from sp_api.base import Marketplaces

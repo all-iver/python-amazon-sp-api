@@ -3,7 +3,6 @@ import json
 from datetime import datetime
 import logging
 import os
-from json import JSONDecodeError
 
 import boto3
 from cachetools import TTLCache
@@ -28,8 +27,7 @@ class Client(BaseClient):
 
     def __init__(
             self,
-            marketplace: Marketplaces = Marketplaces[os.environ.get('SP_API_DEFAULT_MARKETPLACE', Marketplaces.US.name)],
-            *,
+            marketplace, #: Marketplaces = Marketplaces[os.environ.get('SP_API_DEFAULT_MARKETPLACE', Marketplaces.US.name)],
             refresh_token=None,
             account='default',
             credentials=None,
@@ -71,11 +69,11 @@ class Client(BaseClient):
         }
 
     @property
-    def auth(self) -> AccessTokenResponse:
+    def auth(self):
         return self._auth.get_auth()
 
     @property
-    def grantless_auth(self) -> AccessTokenResponse:
+    def grantless_auth(self):
         if not self.grantless_scope:
             raise MissingScopeException("Grantless operations require scope")
         return self._auth.get_grantless_auth(self.grantless_scope)
@@ -105,8 +103,8 @@ class Client(BaseClient):
                         aws_session_token=aws_session_token
                         )
 
-    def _request(self, path: str, *, data: dict = None, params: dict = None, headers=None,
-                 add_marketplace=True) -> ApiResponse:
+    def _request(self, path, data=None, params=None, headers=None,
+                 add_marketplace=True):
         if params is None:
             params = {}
         if data is None:
@@ -124,11 +122,11 @@ class Client(BaseClient):
                       auth=self._sign_request())
         return self._check_response(res)
 
-    def _check_response(self, res) -> ApiResponse:
+    def _check_response(self, res):
         if self.method == 'DELETE' and 200 <= res.status_code < 300:
             try:
                 js = res.json() or {}
-            except JSONDecodeError:
+            except ValueError:
                 js = {'status_code': res.status_code}
         else:
             js = res.json() or {}
@@ -138,7 +136,8 @@ class Client(BaseClient):
         if error:
             exception = get_exception_for_code(res.status_code)
             raise exception(error, headers=res.headers)
-        return ApiResponse(**js, headers=res.headers)
+        js['headers'] = res.headers
+        return ApiResponse(**js)
 
     def _add_marketplaces(self, data):
         POST = ['marketplaceIds', 'MarketplaceIds']
@@ -152,7 +151,7 @@ class Client(BaseClient):
             return
         return data.update({k: self.marketplace_id if not k.endswith('s') else [self.marketplace_id] for k in GET})
 
-    def _request_grantless_operation(self, path: str, *, data: dict = None, params: dict = None):
+    def _request_grantless_operation(self, path, data=None, params=None):
         headers = {
             'host': self.endpoint[8:],
             'user-agent': self.user_agent,
